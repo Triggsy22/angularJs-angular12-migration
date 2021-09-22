@@ -6,7 +6,6 @@ module.exports = {
     entry: {
         'html': './client/index.html',
         'ts': './client/main.ts',
-        /*'ts': './client/app.module.ajs.ts',*/
     },
     output: {
         filename: function(obj){
@@ -45,13 +44,34 @@ module.exports = {
                         loader: 'babel-loader',
                         options: {
                             presets: ['@babel/preset-typescript'],
-                            cacheDirectory: true
+                            /*cacheDirectory: true*/
                         }
                     }
                 ]
             },
             {
+                test: /\.html$/i,
+                include:[
+                    path.resolve(__dirname, 'client'),
+                ],
+                exclude:[
+                    path.resolve(__dirname, 'client/index.html'),
+                    /node_modules/
+                ],
+                use:[
+                    {
+                        loader: 'html-loader',
+                        options: {
+                            minimize: false,
+                        }
+                    },
+                ],
+            },
+            {
                 test: /index\.html$/i,
+                include:[
+                    path.resolve(__dirname, 'client/index.html'),
+                ],
                 use:[
                     {
                         loader: 'html-webpack-plugin/lib/loader.js',

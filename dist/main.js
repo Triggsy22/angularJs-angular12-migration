@@ -36616,6 +36616,34 @@ module.exports = angular;
 
 /***/ }),
 
+/***/ 688:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// Module
+var code = "<p>Ich bin Angular {{angularHand}}</p>\r\n<angularjs-directive></angularjs-directive>";
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
+
+/***/ }),
+
+/***/ 351:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// Module
+var code = "<p>Ich bin AngularJS {{vm.angularJsHand}}</p>\r\n<!--\r\n<angular-directive></angular-directive>-->\r\n";
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
+
+/***/ }),
+
 /***/ 660:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -83252,7 +83280,7 @@ var _NullComponentFactoryResolver = /** @class */ (function () {
  * \@stable
  * @abstract
  */
-var core_ComponentFactoryResolver = /** @class */ (function () {
+var ComponentFactoryResolver = /** @class */ (function () {
     function ComponentFactoryResolver() {
     }
     ComponentFactoryResolver.NULL = new _NullComponentFactoryResolver();
@@ -83748,7 +83776,7 @@ var EventEmitter = /** @class */ (function (_super) {
  *
  * \@experimental
  */
-var core_NgZone = /** @class */ (function () {
+var NgZone = /** @class */ (function () {
     function NgZone(_a) {
         var _b = _a.enableLongStackTrace, enableLongStackTrace = _b === void 0 ? false : _b;
         this.hasPendingMicrotasks = false;
@@ -84213,7 +84241,7 @@ var Testability = /** @class */ (function () {
         this._ngZone.runOutsideAngular(function () {
             _this._ngZone.onStable.subscribe({
                 next: function () {
-                    core_NgZone.assertNotInAngularZone();
+                    NgZone.assertNotInAngularZone();
                     scheduleMicroTask(function () {
                         _this._isZoneStable = true;
                         _this._runCallbacksIfReady();
@@ -84355,7 +84383,7 @@ var Testability = /** @class */ (function () {
     ];
     /** @nocollapse */
     Testability.ctorParameters = function () { return [
-        { type: core_NgZone, },
+        { type: NgZone, },
     ]; };
     return Testability;
 }());
@@ -84788,7 +84816,7 @@ var PlatformRef = /** @class */ (function () {
         // pass that as parent to the NgModuleFactory.
         var /** @type {?} */ ngZoneOption = options ? options.ngZone : undefined;
         var /** @type {?} */ ngZone = getNgZone(ngZoneOption);
-        var /** @type {?} */ providers = [{ provide: core_NgZone, useValue: ngZone }];
+        var /** @type {?} */ providers = [{ provide: NgZone, useValue: ngZone }];
         // Attention: Don't use ApplicationRef.run here,
         // as we want to be sure that all possible constructor calls are inside `ngZone.run`!
         return ngZone.run(function () {
@@ -84969,7 +84997,7 @@ function getNgZone(ngZoneOption) {
     }
     else {
         ngZone = (ngZoneOption === 'zone.js' ? undefined : ngZoneOption) ||
-            new core_NgZone({ enableLongStackTrace: isDevMode() });
+            new NgZone({ enableLongStackTrace: isDevMode() });
     }
     return ngZone;
 }
@@ -85057,7 +85085,7 @@ var ApplicationRef = /** @class */ (function () {
             var /** @type {?} */ stableSub;
             _this._zone.runOutsideAngular(function () {
                 stableSub = _this._zone.onStable.subscribe(function () {
-                    core_NgZone.assertNotInAngularZone();
+                    NgZone.assertNotInAngularZone();
                     // Check whether there are no pending macro/micro tasks in the next tick
                     // to allow for NgZone to update the state.
                     scheduleMicroTask(function () {
@@ -85070,7 +85098,7 @@ var ApplicationRef = /** @class */ (function () {
                 });
             });
             var /** @type {?} */ unstableSub = _this._zone.onUnstable.subscribe(function () {
-                core_NgZone.assertInAngularZone();
+                NgZone.assertInAngularZone();
                 if (_this._stable) {
                     _this._stable = false;
                     _this._zone.runOutsideAngular(function () { observer.next(false); });
@@ -85327,11 +85355,11 @@ var ApplicationRef = /** @class */ (function () {
     ];
     /** @nocollapse */
     ApplicationRef.ctorParameters = function () { return [
-        { type: core_NgZone, },
+        { type: NgZone, },
         { type: Console, },
         { type: Injector, },
         { type: ErrorHandler, },
-        { type: core_ComponentFactoryResolver, },
+        { type: ComponentFactoryResolver, },
         { type: ApplicationInitStatus, },
     ]; };
     return ApplicationRef;
@@ -91434,7 +91462,7 @@ var NgModuleRef_ = /** @class */ (function () {
         get: /**
          * @return {?}
          */
-        function () { return this.get(core_ComponentFactoryResolver); },
+        function () { return this.get(ComponentFactoryResolver); },
         enumerable: true,
         configurable: true
     });
@@ -100989,7 +101017,7 @@ var NgComponentOutlet = /** @class */ (function () {
                 }
             }
             var /** @type {?} */ componentFactoryResolver = this._moduleRef ? this._moduleRef.componentFactoryResolver :
-                elInjector.get(core_ComponentFactoryResolver);
+                elInjector.get(ComponentFactoryResolver);
             var /** @type {?} */ componentFactory = componentFactoryResolver.resolveComponentFactory(this.ngComponentOutlet);
             this._componentRef = this._viewContainerRef.createComponent(componentFactory, this._viewContainerRef.length, elInjector, this.ngComponentOutletContent);
         }
@@ -107474,7 +107502,7 @@ function exportNgVar(name, value) {
  */
 var CORE_TOKENS = {
     'ApplicationRef': ApplicationRef,
-    'NgZone': core_NgZone,
+    'NgZone': NgZone,
 };
 var INSPECT_GLOBAL_NAME = 'probe';
 var CORE_TOKENS_GLOBAL_NAME = 'coreTokens';
@@ -107615,7 +107643,7 @@ var EventManager = /** @class */ (function () {
     /** @nocollapse */
     EventManager.ctorParameters = function () { return [
         { type: Array, decorators: [{ type: core_Inject, args: [EVENT_MANAGER_PLUGINS,] },] },
-        { type: core_NgZone, },
+        { type: NgZone, },
     ]; };
     return EventManager;
 }());
@@ -108516,7 +108544,7 @@ var DomEventsPlugin = /** @class */ (function (_super) {
         var /** @type {?} */ callback = /** @type {?} */ (handler);
         // if zonejs is loaded and current zone is not ngZone
         // we keep Zone.current on target for later restoration.
-        if (zoneJsLoaded && (!core_NgZone.isInAngularZone() || isBlackListedEvent(eventName))) {
+        if (zoneJsLoaded && (!NgZone.isInAngularZone() || isBlackListedEvent(eventName))) {
             var /** @type {?} */ symbolName = symbolNames[eventName];
             if (!symbolName) {
                 symbolName = symbolNames[eventName] = __symbol__(ANGULAR + eventName + FALSE);
@@ -108605,7 +108633,7 @@ var DomEventsPlugin = /** @class */ (function (_super) {
     /** @nocollapse */
     DomEventsPlugin.ctorParameters = function () { return [
         { type: undefined, decorators: [{ type: core_Inject, args: [DOCUMENT$1,] },] },
-        { type: core_NgZone, },
+        { type: NgZone, },
     ]; };
     return DomEventsPlugin;
 }(EventManagerPlugin));
@@ -110745,7 +110773,7 @@ function createBuiltinExternalReferencesMap() {
     map.set(Identifiers.QueryList, QueryList);
     map.set(Identifiers.TemplateRef, TemplateRef);
     map.set(Identifiers.CodegenComponentFactoryResolver, CodegenComponentFactoryResolver);
-    map.set(Identifiers.ComponentFactoryResolver, core_ComponentFactoryResolver);
+    map.set(Identifiers.ComponentFactoryResolver, ComponentFactoryResolver);
     map.set(Identifiers.ComponentFactory, ComponentFactory);
     map.set(Identifiers.ComponentRef, ComponentRef);
     map.set(Identifiers.NgModuleFactory, NgModuleFactory);
@@ -112855,7 +112883,7 @@ var UpgradeModule = /** @class */ (function () {
     /** @nocollapse */
     UpgradeModule.ctorParameters = function () { return [
         { type: Injector, },
-        { type: core_NgZone, },
+        { type: NgZone, },
     ]; };
     return UpgradeModule;
 }());
@@ -112880,34 +112908,93 @@ var UpgradeModule = /** @class */ (function () {
 // EXTERNAL MODULE: ./node_modules/angular/index.js
 var node_modules_angular = __webpack_require__(695);
 var angular_default = /*#__PURE__*/__webpack_require__.n(node_modules_angular);
-;// CONCATENATED MODULE: ./client/app.module.ajs.ts
-
-const MODULE_NAME = 'justATestModule';
-/* harmony default export */ const app_module_ajs = (MODULE_NAME);
-angular_default().module(MODULE_NAME, []).component('justATestComponent', {
-  template: '<p>Hello World</p>'
-});
-;// CONCATENATED MODULE: ./client/app.module.ts
+;// CONCATENATED MODULE: ./client/angular/angular.component.ts
 var _dec, _class;
 
 
-
-
-
-let AppModule = (_dec = core_NgModule({
-  imports: [BrowserModule, UpgradeModule]
-}), _dec(_class = class AppModule {
-  constructor(upgrade) {
-    this.upgrade = upgrade;
-  }
-
-  ngDoBootstrap() {
-    this.upgrade.bootstrap(document.documentElement, [app_module_ajs], {
-      strictDi: true
-    });
-  }
-
+let AngularComponent = (_dec = core_Component({
+  selector: 'angular-component',
+  template: __webpack_require__(688)/* ["default"] */ .Z
+}), _dec(_class = class AngularComponent {
+  angularHand = ' und ich gebe Angular die Hand :)';
 }) || _class);
+;// CONCATENATED MODULE: ./client/angular/angularjs.directive.ts
+var angularjs_directive_dec, _dec2, angularjs_directive_class, _class2, _descriptor;
+
+function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) { var desc = {}; Object.keys(descriptor).forEach(function (key) { desc[key] = descriptor[key]; }); desc.enumerable = !!desc.enumerable; desc.configurable = !!desc.configurable; if ('value' in desc || desc.initializer) { desc.writable = true; } desc = decorators.slice().reverse().reduce(function (desc, decorator) { return decorator(target, property, desc) || desc; }, desc); if (context && desc.initializer !== void 0) { desc.value = desc.initializer ? desc.initializer.call(context) : void 0; desc.initializer = undefined; } if (desc.initializer === void 0) { Object.defineProperty(target, property, desc); desc = null; } return desc; }
+
+function _initializerWarningHelper(descriptor, context) { throw new Error('Decorating class property failed. Please ensure that ' + 'proposal-class-properties is enabled and runs after the decorators transform.'); }
+
+
+
+const ng1DemoComponent = {
+  selector: 'ng1Demo',
+  template: 'Hello, {{ $ctrl.username }}!',
+  bindings: {
+    username: '<'
+  },
+  controller: class Ng1DemoComponent {}
+};
+let AngularjsDirective = (angularjs_directive_dec = core_Directive({
+  selector: ng1DemoComponent.selector
+}), _dec2 = core_Input(), angularjs_directive_dec(angularjs_directive_class = (_class2 = class AngularjsDirective extends UpgradeComponent {
+  username = _initializerWarningHelper(_descriptor, this);
+
+  constructor(elementRef, injector) {
+    super(ng1DemoComponent.selector, elementRef, injector);
+  }
+
+}, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "username", [_dec2], {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  initializer: null
+})), _class2)) || angularjs_directive_class);
+;// CONCATENATED MODULE: ./client/angular/angular.module.ts
+var angular_module_dec, angular_module_class;
+
+
+
+
+
+
+let AngularModule = (angular_module_dec = core_NgModule({
+  bootstrap: [AngularComponent],
+  declarations: [AngularComponent, AngularjsDirective],
+  entryComponents: [AngularComponent],
+  imports: [BrowserModule, UpgradeModule //zwingend erforderlich
+  ]
+}), angular_module_dec(angular_module_class = class AngularModule {
+  ngDoBootstrap() {}
+
+}) || angular_module_class);
+
+;// CONCATENATED MODULE: ./client/angularjs/angularjs.component.ajs.ts
+/* harmony default export */ function angularjs_component_ajs() {
+  return {
+    controller: 'angularjsController',
+    controllerAs: 'vm',
+    restrict: 'E',
+    template: __webpack_require__(351)/* ["default"] */ .Z
+  };
+}
+;// CONCATENATED MODULE: ./client/angularjs/angularjs.controller.ajs.ts
+/* harmony default export */ function angularjs_controller_ajs() {
+  let vm = this;
+  vm.angularJsHand = 'und ich gebe AngularJS die Hand :)';
+}
+;
+;// CONCATENATED MODULE: ./client/angularjs/angularjs.module.ajs.ts
+
+
+
+
+
+/* harmony default export */ function angularjs_module_ajs() {
+  angular_default().module('angularjsModule', []).component('angularjsComponent', angularjs_component_ajs()).controller('angularjsController', angularjs_controller_ajs).directive('angularDirective', downgradeComponent({
+    component: AngularComponent
+  }));
+}
 ;// CONCATENATED MODULE: ./client/main.ts
 
 
@@ -112915,8 +113002,16 @@ let AppModule = (_dec = core_NgModule({
 
 
 
+
+
 setAngularJSGlobal(node_modules_angular);
-platformBrowserDynamic().bootstrapModule(AppModule);
+angularjs_module_ajs(); // Bootstrap using the UpgradeModule
+
+platformBrowserDynamic().bootstrapModule(AngularModule).then(platformRef => {
+  console.log("Bootstrapping in Hybrid mode with Angular & AngularJS");
+  const upgradeModule = platformRef.injector.get(UpgradeModule);
+  upgradeModule.bootstrap(document.body, ['angularjsModule']);
+});
 })();
 
 /******/ })()
