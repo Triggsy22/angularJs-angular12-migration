@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
     template: require('./angular.component.html').default
 })
 export class AngularComponent {
-    angularHand = ' und ich gebe Angular die Hand :)';
+    angularHand = ' and i got loaded from AngularJs';
 }

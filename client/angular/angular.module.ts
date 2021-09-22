@@ -3,16 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { UpgradeModule } from '@angular/upgrade/static';
 
 import { AngularComponent } from './angular.component';
-import {AngularjsDirective} from "./angularjs.directive";
 
 @NgModule({
-    bootstrap:[AngularComponent],
+    //bootstrap:[AngularComponent],//hier darf nicht gebootstraped werden, weil sonst ngDoBootstrap() (das laden von angularjs) nicht ausgeführt wird!
     declarations:[
         AngularComponent,
-        AngularjsDirective
     ],
     entryComponents: [
-        AngularComponent
+        AngularComponent,
     ],
     imports: [
         BrowserModule,
@@ -20,6 +18,10 @@ import {AngularjsDirective} from "./angularjs.directive";
     ],
 })
 export default class AngularModule {
-    ngDoBootstrap(){
+    constructor(private upgrade: UpgradeModule) { }
+
+    ngDoBootstrap() {
+        console.log("Bootstrapping AngularJS");
+        this.upgrade.bootstrap(document.body, ['angularjsModule'], { strictDi: true });
     }
 }

@@ -37,13 +37,25 @@ module.exports = {
     module:{
         rules:[
             {
-                test: /\.(js|ts)$/,
+                test: /\.js$/,
                 exclude: /(node_modules|bower_components)/,
                 use: [
                     {
                         loader: 'babel-loader',
                         options: {
                             presets: ['@babel/preset-typescript'],
+                            /*cacheDirectory: true*/
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.ts$/,
+                exclude: /(node_modules|bower_components)/,
+                use: [
+                    {
+                        loader: 'awesome-typescript-loader',
+                        options: {
                             /*cacheDirectory: true*/
                         }
                     }

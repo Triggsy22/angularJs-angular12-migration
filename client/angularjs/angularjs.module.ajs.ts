@@ -1,4 +1,4 @@
-import angular from 'angular';
+import * as angular from 'angular';
 import {AngularComponent} from '../angular/angular.component'
 import {downgradeComponent, downgradeInjectable, downgradeModule} from "@angular/upgrade/static";
 import angularjsComponent from './angularjs.component.ajs';
